@@ -101,7 +101,11 @@ class Api
     private function initAccessToken()
     {
         if ($this->access_token === null) {
-            $this->access_token = $this->request('oauth/access_token', ['client_id' => $this->clientId, 'client_secret' => $this->clientSecret, 'grant_type' => 'client_credentials'], 'POST');
+            $response = $this->request('oauth/access_token', ['client_id' => $this->clientId, 'client_secret' => $this->clientSecret, 'grant_type' => 'client_credentials'], 'POST');
+
+            if (is_array($response) && isset($response['access_token'])) {
+                $this->access_token = $response['access_token'];
+            }
         }
     }
 
