@@ -1,5 +1,5 @@
 {
-	"name": "sofwar/AbiosGaming",
+	"name": "sofwar/abiosgaming-api-php",
 	"type": "library",
 	"description": "A PHP Library for interacting with Abios Gaming's API.",
 	"homepage": "https://github.com/SofWar/abiosgaming-api-php",
