@@ -70,7 +70,6 @@ class Request
         if ($result->getStatusCode() !== 200) {
             $respCode = $result->getStatusCode();
             $respBody = $result->getBody();
-
             throw new ApiException('AbiosGaming API returned ' . $respCode . ': ' . $respBody);
         }
 
@@ -84,7 +83,37 @@ class Request
      */
     private function get()
     {
-        return $this->api->getGuzzleClient()->get($this->url, ['query' => $this->args]);
+        $url = $this->build_query_url();
+
+        return $this->api->getGuzzleClient()->get($this->url, ['query' => $url]);
+    }
+
+    /**
+     * @param bool $url
+     * @return null|string
+     */
+    private function build_query_url($url = false)
+    {
+        $query = '';
+
+        if ($url) {
+            $query = $this->url;
+        }
+
+
+        if (count($this->args)) {
+            $query .= '?';
+
+            foreach ($this->args as $name => $value) {
+                if (is_array($value)) {
+                    $query .= $this->_build_query_url($name, $value);
+                } else {
+                    $query .= '&' . $name . '=' . $value;
+                }
+            }
+        }
+
+        return $query;
     }
 
     /**
@@ -115,8 +144,35 @@ class Request
         $this->args = [];
     }
 
+    /**
+     * Set Method URL
+     *
+     * @param $url
+     */
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    /**
+     * Build query url
+     *
+     * @param $name
+     * @param $args
+     * @return string
+     */
+    private function _build_query_url($name, $args)
+    {
+        $_q = '';
+
+        foreach ($args as $value) {
+            if (is_array($value)) {
+                $_q .= $this->_build_query_url($name, $value);
+            } else {
+                $_q .= '&' . $name . '[]=' . $value;
+            }
+        }
+
+        return $_q;
     }
 }

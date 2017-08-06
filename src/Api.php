@@ -5,7 +5,6 @@
 
 namespace SofWar\AbiosGaming;
 
-
 use GuzzleHttp\Client;
 
 class Api
@@ -39,20 +38,11 @@ class Api
     private $access_token;
 
     /**
-     * Expired access token
-     * @var string
-     */
-    private $expiredDateTime;
-
-    /**
      * Guzzle Client
      *
      * @var Client
      */
     private $guzzleClient;
-
-
-    private $cache;
 
     /**
      * Main Constructor for AbiosGaming API Class
@@ -77,7 +67,7 @@ class Api
         $this->clientSecret = $clientSecret;
 
         if ($guzzle === null) {
-            $this->guzzleClient = new Client(['base_uri' => $this->getApiUrl(), 'timeout' => 2]);
+            $this->guzzleClient = new Client(['base_uri' => $this->getApiUrl()]);
         } else {
             $this->guzzleClient = $guzzle;
         }
@@ -117,9 +107,9 @@ class Api
      */
     public function request($url, array $args = [], $method = 'GET')
     {
-        $request = new Request($this, self::$apiUrl . $url);
+        $request = new Request($this, $url);
 
-        if ($url === 'oauth/access_token') {
+        if ($url !== 'oauth/access_token') {
             $request->setArgs(['access_token' => $this->access_token]);
         }
 
