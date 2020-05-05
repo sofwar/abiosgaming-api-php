@@ -1,23 +1,31 @@
 {
-	"name": "sofwar/abiosgaming-api-php",
-	"type": "library",
-	"description": "A PHP Library for interacting with Abios Gaming's API.",
-	"homepage": "https://github.com/SofWar/abiosgaming-api-php",
-	"keywords": ["abios", "gaming", "game", "api", "esports"],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "SofWar",
-			"email": "ya.sofwar@yandex.com",
-			"homepage": "https://github.com/SofWar"
-		}
-	],
-	"autoload": {
-		"psr-4": {"SofWar\\AbiosGaming\\": "src/"}
-	},
-	"require": {
-		"php": ">=5.6.0",
+    "name": "sofwar/abiosgaming-api-php",
+    "type": "library",
+    "description": "A PHP Library for interacting with Abios Gaming's API.",
+    "homepage": "https://github.com/SofWar/abiosgaming-api-php",
+    "keywords": [
+        "abios",
+        "gaming",
+        "game",
+        "api",
+        "esports"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SofWar",
+            "email": "ya.sofwar@yandex.com",
+            "homepage": "https://github.com/SofWar"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SofWar\\AbiosGaming\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.6.0",
         "ext-curl": "*",
-		"guzzlehttp/guzzle": "6.3.*"
-	}
+        "guzzlehttp/guzzle": "6.5.*"
+    }
 }
